@@ -1,1 +1,245 @@
-书籍id<%=bookId%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<!-- 用于格式检测，不会把页面中出现的数字智能识别成号码 -->
+	<meta name="format-detection" content="telephone=0"> 
+	<title>书籍详情</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<style type="text/css">
+		.main-card{
+			border-bottom: 10px solid #F5F5F5;
+		}
+		.main-card.-folder{
+			padding-bottom: 1px;
+		}
+		.main-card.-folder .cnt{
+			margin-bottom:12px;
+		}
+		.main-card>.cnt,.main-card .list li{
+			padding-left: 14px;
+			padding-right: 14px;
+		}
+		.u-title{
+			
+		}
+		.u-book{
+			position: relative;
+			overflow: hidden;
+		}
+		.u-book.-detail{
+			padding: 40px;
+			display: table;
+			width: 100%;
+			box-sizing: border-box;
+		}
+		.u-book.-detail .book-cover{
+			width: 100px;
+			height: 134px;
+		}
+		.u-book.-detail .author{
+			color: #4b99a7;
+		}
+		.u-book.-detail .author>span{
+			display: inline-block;
+			margin-right: 5px;
+		}
+		.u-book.-detail .title{
+			margin-bottom: 13px;
+			font-size: 16px;
+		}
+		.u-book.-detail .info{
+			padding: 0 0 0 14px;
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.book-cover{
+			position: relative;
+			background: #EEECE9;
+			box-shadow: 0px 6px 5px -3px #AAAAAA;
+			border: 1px solid #F0F0F0;
+			border-bottom: none;
+			overflow: hidden;
+		}
+		.book-cover img{
+			width: 100%;
+			height: 100%;
+		}
+		.u-booktag{
+			margin-left: 3px;
+			border: 1px solid #00a0e9;
+			color: #FFFFFF;
+			border-radius: 4px;
+			font-size: 12px;
+			line-height: 16px;
+			display: inline-block;
+			padding: 0 2px;
+		}
+		.u-booktag.-serial{
+			color: #63bd6e;
+			border-color: #63BD6E;
+		}
+		.book-dash .wrap{
+			padding: 0 14px;
+			margin: 0 0 27px 0;
+		}
+		.book-dash-text:after{
+			content: '开始阅读';
+		}
+		.btn-group{
+			width: 100%;
+			font-size: 0;
+			white-space: nowrap;
+		}
+		.btn-group li{
+			display: inline-block;
+			width: 49%;
+		}
+		.btn-group li:only-child{
+			width: 100%;
+		}
+		.btn-group li:first-child{
+			margin-right: 2%;
+		}
+		.u-btn2{
+			display: block;
+			height: 2.8em;
+			line-height: 2.8em;
+			text-align: center;
+			border-radius: 4px;
+			font-size: 14px;
+			-webkit-box-sizing: border-box;
+			background: #f35d02;
+			border: 1px solid #e35109;
+			color: #FFFFFF;
+			padding: 0 10px;
+		}
+		.folder-cnt{
+			position: relative;
+			line-height: 1.6;
+			padding: 0 14px;
+			margin-bottom: 10px;
+			color: #585858;
+			font-size: 14px;
+		}
+		.u-folder>.folder-tail{
+			text-align: center;
+			font-size: 14px;
+			border-top: 1px solid #F0F0F0;
+			color: #8D8D8D;
+		}
+		.u-folder>.folder-top{
+			font-size: 16px;
+			font-weight: normal;
+			color: #8D8D8D;
+			padding: 14px 14px 8px;
+		}
+		.m-tag{
+			line-height: 1;
+			overflow: hidden;
+		}
+		.m-tag.-color .u-tag:nth-child(3n+1){
+			background-color: #fbebe8;
+		}
+		.m-tag.-color .u-tag:nth-child(3n+2){
+			background-color: #fbebe8;
+		}
+		.m-tag.-color .u-tag:nth-child(3n+3){
+			background-color: #fbebe8;
+		}
+		.m-tag .u-tag{
+			margin: 0 10px 5px 0;
+			display: inline-block;
+			width: auto;
+			line-height: 1.8em;
+			padding: 0 20px;
+			color: #766d5d;
+			border-radius: 4px;
+			background: #909da8;
+		    font-size: 14px ;
+		    text-align: center;
+		    border: 1px solid #d3d3d3;
+		}
+	</style>
+</head>
+<body>
+	<div id="app" style="width: 734px;overflow: hidden;">
+		<% include include/common-header.html %>
+		<div class="container-scroll" style="animation: 734px;">
+			<div class="book-page">
+				<section class="main-card">
+					<div class="u-book -detail">
+						<div class="book-cover">
+							<img src=""  alt=""/>
+						</div>
+						<div class="info">
+							<h3 class="title">老九门</h3>
+							<p class="author">
+								<span class="author">南派三叔</span>
+							</p>
+							<div class="u-grade">
+								<span class="read">12个评价</span>
+							</div>
+							<p class="price">价格：1书币、千字</p>
+							<p class='count'>
+								字数：70999字
+								<span class="u-booktag -serial">连载中</span>
+							</p>
+						</div>
+					</div>
+				</section>
+				<section class="main-card">
+					<div class="book-dash">
+						<div class="wrap">
+							<ul class="btn-group">
+								<li class="u-btn2">
+									<span class="book-dash-text"></span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="u-folder">
+						<div class="folder-cnt">
+							内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍
+							内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍
+							内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍
+							内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍
+						</div>
+						<div class="folder-tail">
+							<div>最新：暂无</div>
+						</div>
+					</div>
+				</section>
+				<section class="main-card">
+					<div class="u-folder">
+						<div class="folder-top">
+							<h3>类别标签</h3>
+						</div>
+						<div class="folder-cnt">
+							<ul class="m-tag -color">
+								<li class="u-tag">
+									寻墓探险
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section class="main-card">
+					<div class="u-title">
+						<h1>喜欢这本书的人也喜欢</h1>
+					</div>
+					<div class="cnt">
+						<ul class="book-table"></ul>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	
+	
+</body>
+	<script src="/static/script/vue.js" type="text/javascript" ></script>
+	<script src="/static/script/zepto.js" type="text/javascript" ></script>
+	<script src="/static/script/pages/book.js" type="text/javascript"></script>
+</html>

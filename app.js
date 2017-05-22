@@ -50,10 +50,56 @@ app.use(controller.get('/book', function* () {
 }))
 
 //渲染搜索页面 以ejs模板
-app.use(controller.get('/search', function* () {
-	this.set('Cache-Control','no-cache');
-	this.body=yield render('search',{title:'搜索页面'}); 
-}))
+app.use(controller.get('/search', function*(){
+	this.set('Cache-Control', 'no-cache');
+	this.body = yield render('search',{nav:'搜索'});
+}));
+app.use(controller.get('/backet', function*(){
+	this.set('Cache-Control', 'no-cache');
+	this.body = yield render('backet');
+}));
+ var querystring = require('querystring')
+app.use(controller.get('/book', function*(){
+	this.set('Cache-Control', 'no-cache');
+	var params = querystring.parse(this.req._parsedUrl.query);
+	var bookId = params.id;
+	this.body = yield render('book',{nav:'书籍详情',bookId:bookId});
+}));
+app.use(controller.get('/reader', function*(){
+	this.set('Cache-Control', 'no-cache');
+	this.body = yield render('reader');
+}));
+
+app.use(controller.get('/male', function*(){
+	this.set('Cache-Control', 'no-cache');
+	this.body = yield render('male',{nav:'男生频道'});
+}));
+
+app.use(controller.get('/female', function*(){
+	this.set('Cache-Control', 'no-cache');
+	this.body = yield render('female',{nav:'女生频道'});
+}));
+
+app.use(controller.get('/usercenter', function*(){
+	this.set('Cache-Control', 'no-cache');
+	this.body = yield render('user-center',{nav:'用户中心'});
+}));
+
+app.use(controller.get('/rank', function*(){
+	this.set('Cache-Control', 'no-cache');
+	this.body = yield render('rank',{nav:'排行'});
+}));
+
+app.use(controller.get('/category', function*(){
+	this.set('Cache-Control', 'no-cache');
+	this.body = yield render('category',{nav:'分类'});
+}));
+
+
+
+
+
+
 
 //接口1------测试
 app.use(controller.get('/api_test', function* () {
