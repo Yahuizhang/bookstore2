@@ -1,9 +1,15 @@
 //联通数据
 $.get('/ajax/index',function(d){
-	console.log(d);
+	var windowWidth=$(window).width();
+	if(windowWidth<320){
+		windowWidth=320;
+	}
+	
 	new Vue({
 		el:'#app',
 		data:{
+			screen_width:windowWidth,
+			double_screen_width:windowWidth*2,
 			top:d.items[0].data.data,
 			hot:d.items[1].data.data,
 			recommend:d.items[2].data.data,
@@ -30,7 +36,7 @@ $.get('/ajax/index',function(d){
 					this.tab_2_class='';
 				}
 				if(pos==1){
-					this.position=(-734);
+					this.position=(-windowWidth);
 					this.header_position=100;
 					this.tab_1_class='';
 					this.tab_2_class='Swipe-tab__on';

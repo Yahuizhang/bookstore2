@@ -22,7 +22,12 @@
 			padding-right: 14px;
 		}
 		.u-title{
-			
+			margin-bottom: 8px;
+			padding-top:15px;
+			padding-left: 14px;
+			padding-right: 14px;
+			font-size: 15px;
+			color: #8D8D8D;
 		}
 		.u-book{
 			position: relative;
@@ -53,6 +58,26 @@
 			padding: 0 0 0 14px;
 			display: table-cell;
 			vertical-align: middle;
+		}
+		.u-book.-vertical{width: 86px;}
+		.u-book.-vertical .title{
+			font-size: 13px;
+			line-height: 1.4em;
+			max-height: 2.8em;
+			overflow: hidden;
+			color: #8D8D8D;
+			margin-bottom: 0;
+			text-align: left;
+		}
+		
+		.u-book.-vertical .book-cover{
+			float: none;
+			height: 113px;
+			width:86px;
+		}
+		.u-book.-vertical .info{
+			margin-left: 0px;
+			padding-top: 8px;
 		}
 		.book-cover{
 			position: relative;
@@ -161,29 +186,50 @@
 		    text-align: center;
 		    border: 1px solid #d3d3d3;
 		}
+		.book-table{font-size: 0;}
+		.book-table li>*{
+			display: inline-block;
+		}
+		.book-table li{
+			width: 33.3%;
+			display: inline-block;
+			vertical-align: top;
+			line-height: 1;
+			margin-bottom: 8px;
+		}
+		.book-table li:nth-child(3n+1){
+			text-align: left;
+		}
+		.book-table li:nth-child(3n+2){
+			text-align: center;
+		}
+		.book-table li:nth-child(3n+3){
+			text-align: right;
+		}
+		
 	</style>
 </head>
 <body>
-	<div id="app" style="width: 734px;overflow: hidden;">
+	<div id="app" style="width: {{screen_width}}px;overflow: hidden;">
 		<% include include/common-header.html %>
-		<div class="container-scroll" style="animation: 734px;">
+		<div class="container-scroll" style="animation: {{screen_width}}px;">
 			<div class="book-page">
-				<section class="main-card">
+				<section class="main-card" style="border-bottom:none;"> 
 					<div class="u-book -detail">
 						<div class="book-cover">
-							<img src=""  alt=""/>
+							<img v-bind:src="d.item.cover"  alt="{{d.item.title}}"/>
 						</div>
 						<div class="info">
-							<h3 class="title">老九门</h3>
+							<h3 class="title">{{d.item.title}}</h3>
 							<p class="author">
-								<span class="author">南派三叔</span>
+								<span class="author">{{d.item.authors}}</span>
 							</p>
 							<div class="u-grade">
-								<span class="read">12个评价</span>
+								<span class="read">{{d.item.score_count}}个评价</span>
 							</div>
-							<p class="price">价格：1书币、千字</p>
+							<p class="price">价格：{{d.item.price}}书币、千字</p>
 							<p class='count'>
-								字数：70999字
+								字数：{{d.item.word_count}}字
 								<span class="u-booktag -serial">连载中</span>
 							</p>
 						</div>
@@ -193,7 +239,7 @@
 					<div class="book-dash">
 						<div class="wrap">
 							<ul class="btn-group">
-								<li class="u-btn2">
+								<li class="u-btn2" v-on:click='readBook()'>
 									<span class="book-dash-text"></span>
 								</li>
 							</ul>
@@ -201,13 +247,10 @@
 					</div>
 					<div class="u-folder">
 						<div class="folder-cnt">
-							内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍
-							内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍
-							内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍
-							内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍
+							{{d.item.content}}
 						</div>
 						<div class="folder-tail">
-							<div>最新：暂无</div>
+							<div>最新：{{d.item.latest}}</div>
 						</div>
 					</div>
 				</section>
@@ -218,8 +261,8 @@
 						</div>
 						<div class="folder-cnt">
 							<ul class="m-tag -color">
-								<li class="u-tag">
-									寻墓探险
+								<li class="u-tag" v-for='tag in d.item.tags'>
+									{{tag}}
 								</li>
 							</ul>
 						</div>
@@ -227,10 +270,50 @@
 				</section>
 				<section class="main-card">
 					<div class="u-title">
+						<h1>作者的其他作品</h1>
+					</div>
+					<div class="cnt">
+						<ul class="book-table">
+							<li v-for='book in d.author_books'>
+								<div class="u-book -vertical">
+									<div class="book-cover">
+										<img v-bind:src="book.cover" alt="{{book.title}}" title="{{book.title}}"/>
+									</div>
+									<div class="info">
+										<h3 class="title">{{book.title}}</h3>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="main-card">
+					<div class="u-title">
 						<h1>喜欢这本书的人也喜欢</h1>
 					</div>
 					<div class="cnt">
-						<ul class="book-table"></ul>
+						<ul class="book-table">
+							<li v-for='book in d.related'>
+								<div class="u-book -vertical">
+									<div class="book-cover">
+										<img v-bind:src="book.cover" alt="{{book.title}}" title="{{book.title}}"/>
+									</div>
+									<div class="info">
+										<h3 class="title">{{book.title}}</h3>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="main-card -folder">
+					<div class="u-title">
+						<h1>图书信息</h1>
+					</div>
+					<div class="cnt">
+						<ul class="text">
+							<li>版权：{{d.item.rights}}</li>
+						</ul>
 					</div>
 				</section>
 			</div>

@@ -54,10 +54,12 @@ app.use(controller.get('/search', function*(){
 	this.set('Cache-Control', 'no-cache');
 	this.body = yield render('search',{nav:'搜索'});
 }));
+
 app.use(controller.get('/backet', function*(){
 	this.set('Cache-Control', 'no-cache');
 	this.body = yield render('backet');
 }));
+
  var querystring = require('querystring')
 app.use(controller.get('/book', function*(){
 	this.set('Cache-Control', 'no-cache');
@@ -149,6 +151,17 @@ app.use(controller.get('/ajax/book', function* () {
 	this.body=service.get_book_data(id);
 }))
 
+app.use(controller.get('/ajax/chapter_data', function* () {
+	this.set('Cache-Control','no-cache');
+	var querystring=require('querystring');
+	var params=querystring.parse(this.req._parsedUrl.query);
+	var id=params.id;
+	if(!id){   //容错
+		id='';
+	}
+	this.body=service.get_chapter_content_data();
+}))
+
 //接口线上------搜索()
 app.use(controller.get('/ajax/search', function* () {
 	this.set('Cache-Control','no-cache');
@@ -158,6 +171,11 @@ app.use(controller.get('/ajax/search', function* () {
 	var end=params.end;
 	var keyword=params.keyword;
 	this.body=yield service.get_search_data(start,end,keyword);     //异步返回
+}))
+
+app.use(controller.get('/ajax/chapter',function*(){
+	this.set('Cache-Control','no-cache');
+	this.body=service.get_chapter_content_data();
 }))
 
 app.listen(3001); //端口配置
