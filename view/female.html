@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<!-- 用于格式检测，不会把页面中出现的数字智能识别成号码 -->
+	<meta name="format-detection" content="telephone=0"> 
+	<title>女生频道</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<style type="text/css">
+		.top{
+		position: relative;
+		height: 44px;
+		border-bottom: 1px solid #DDDDDD;
+		font: 15px/45px a;
+		color: rgba(0,0,0,0.7);
+		background-color: #EFEFF0;
+	}
+	.top__back{
+		float: left;
+		width: 42px;
+		height: 44px;
+	}
+	.top__back:before{
+		content: '';
+		display: block;
+		margin: 15px 0 0 16px;
+		width: 10px;
+		height: 16px;
+		background: url(/static/img/back.png) no-repeat;
+		background-size: 10px 16px;
+	}
+	.header-home{
+		float: right;
+		height: 44px;
+		width: 44px;
+		background: url(http://image.read.duokan.com/mfsv2/download/fdsc3/p01eZH42sBV7/QTS90E2ZVritaa.png) no-repeat center;
+		background-size: 16px;
+	}
+	</style>
+</head>
+<body>
+	<div id="app" style="width:734px;overflow: hidden;">
+		<div class='top'>
+			<a class='top__back' href="/"></a>
+			<span class="top_title">女生频道</span>
+			<a class="header-home" href="/"></a>
+		</div> 
+		
+	</div>
+	
+	
+</body>
+	<script src="/static/script/vue.js" type="text/javascript" ></script>
+	<script src="/static/script/zepto.js" type="text/javascript" ></script>
+	<script src="/static/script/pages/female.js" type="text/javascript"></script>
+</html>

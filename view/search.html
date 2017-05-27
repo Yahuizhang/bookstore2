@@ -117,10 +117,79 @@
 	.search-body .u-tag:nth-child(3n+3){
 		background-color: #fbebe8;
 	}
+	.book-list{
+		padding: 0 20px;
+	}
+	.book-list li{
+		padding: 17px 0;
+    	border-bottom: 1px solid #f0f0f0;
+	}
+	.book-cover{
+		float: left;
+	    position: relative;
+	    width: 85px;
+	    height: 113px;
+	    background: #eeece9;
+	    border: 1px solid #f0f0f0;
+	    border-radius: 1px;
+	    overflow: hidden;
+	}
+	.book-cover img{
+		width: 100%;
+		height: 100%;
+	}
+	.book-cover .book-isFinish{
+		position: absolute;
+	    bottom: 0;
+	    width: 100%;
+	    color: #ffffff;
+	    padding: 25px 7px 6px;
+	    font: 10px/10px a;
+	    background: -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
+	}
+	.info{
+		margin-left: 100px;
+	    padding-top: 6px;
+	    background: #FFFFFF;
+	}
+	.info .search-book-title{
+		    margin-bottom: 4px;
+		    font: 16px/17px a;
+		    color: rgab(0,0,0,0.9);
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+	}
+	.info .search-book-author{
+		margin-bottom: 4px;
+		font: 15px/17px a;
+		color: rgba(0,0,0,0.9);
+		overflow: hidden;
+		text-overflow:ellipsis;
+		
+	}
+	.info .search-book-summary{
+		margin: 8px 0 0;
+	    height: 4.8em;
+	    font: 12px/1.4em a;
+	    color: rgba(0,0,0,0.7);
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: normal;
+	    display: -webkit-box;
+	    -webkit-line-clamp:2;
+	    -webkit-box-orient: vertical;
+	}
+	.search-book-summaryWords{
+		margin-bottom: 4px;
+	}
+	.search-book-summaryContent{
+		line-height: 1.5;
+	}
 	</style>
 </head>
 <body>
-	<div id="app" style="width: 734px;overflow: hidden;">
+	<div id="app" style="width: {{screen_width}}px;overflow: hidden;">
 		<div class='top'>
 			<a class='top__back' href="/"></a>
 			<span class="top_title">搜索</span>
@@ -130,13 +199,13 @@
 			<div class="search-top">
 				<div class="search-icon-content">
 					<div class="search-icon"></div>
-					<input type="text" placeholder="输入书名/作者/关键字" class="search-input"/>
-					<div class="search-words"><a href="">搜索</a></div>
+					<input type="text" placeholder="输入书名/作者/关键字" class="search-input" id="search-input"/>
+					<div class="search-words" v-on:click='doSearch'>搜索</div>
 				</div>
 			</div>
 			<!--热门搜索小说-->
-			<div class="search-body">
-				<div class="">
+			<div class="search-body" >
+				<div class="" style="display: {{tagsIsShow}};">
 					<ul class="search-tags">
 						<li class="u-tag">小说1</li>
 						<li class="u-tag">小说1</li>
@@ -145,31 +214,37 @@
 						<li class="u-tag">小说1</li>
 						<li class="u-tag">小说1</li>
 						<li class="u-tag">小说1</li>
-						<li class="u-tag">小说1</li>
-						<li class="u-tag">小说1</li>
-						<li class="u-tag">小说1</li>
-						<li class="u-tag">小说1</li>
-						<li class="u-tag">小说1</li>
-						<li class="u-tag">小说1</li>	
+						
 					</ul>
 				</div>
-			</div>
-			<!--搜索结果   此时上面的隐藏-->
-			<div class="search-body">
-				<ul class="book-list">
-					<li>
-						<div class="u-book">
-							<div class="book-cover">
-								<img src="" />
+				<!--搜索结果   此时上面的隐藏-->
+				<div class="">
+					<ul class="book-list">
+						<li v-for='item in search'>
+							<div class="u-book">
+								<div class="book-cover">
+									<img v-bind:src="item.cover" alt="{{item.title}}" title="{{item.title}}"/>
+									<p class="book-isFinish">完结</p>
+								</div>
+								<div class="info">
+									<h3 class="search-book-title">{{item.title}}</h3>
+									<p class="search-book-author">{{item.role}}</p>
+									<div class="search-book-summary">
+										<p class="search-book-summaryWords">书籍简介：</p>
+										<p class="search-book-summaryContent">
+										{{item.intro}}
+										</p>
+									</div>
+								</div>
 							</div>
-							<div class="info">
-								<h3 class="search-book-title">书籍名称</h3>
-								<div class="search-book-summary">书籍简介</div>
-							</div>
-						</div>
-					</li>
-				</ul>
+						</li>
+					</ul>
+				</div>
+				
 			</div>
+			
+			
+			
 		</div>
 		
 	</div>
