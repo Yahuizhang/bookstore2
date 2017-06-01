@@ -37,29 +37,141 @@
 		background: url(http://image.read.duokan.com/mfsv2/download/fdsc3/p01eZH42sBV7/QTS90E2ZVritaa.png) no-repeat center;
 		background-size: 16px;
 	}
+
+		.channel-group{
+			border-bottom: 10px solid #f5f5f5;
+		}
+		.channel-group-card{
+			width: 100%;
+			position: relative;
+		}
+		.channel-group-header{
+			position: relative;
+			padding: 10px 14px;
+			border-bottom: 1px solid #f0f0f0;
+			border-left: 6px solid #ffab18;
+		}
+		.channel-group-header .header-title{
+			font-size: 16px;
+			font-weight: normal;
+			color: #333;
+		}
+		.book-list li{
+			border-bottom: 1px solid #F0F0F0;
+		}
+		.book-list li>.u-book{
+			padding: 13px 14px;
+		}
+		.u-book{
+			position: relative;
+			overflow: hidden;
+		}
+		.u-book .book-cover{
+			float: left;
+			margin-left: 10px;
+		}
+		.book-cover{
+			position: relative;
+			width: 8.5rem;
+			height: 11.3rem;
+			background-color: #eeece9;
+			box-shadow: 0px 6px 5px -3px #aaaaaa;
+			border:1px solid #F0F0F0;
+			border-bottom: none;
+			overflow: hidden;
+		}
+		.book-cover:after{
+			content: '';
+			margin-right: 10px;
+		}
+		.book-cover img{
+			width: 100%;
+			height: 100%;
+		}
+		.u-book .info{
+			padding-top:1.2rem;
+			padding-left: 125px;
+		}
+		.u-book .info .title{
+			margin-bottom:6px;
+			font-size: 16px;
+			font-weight: 400;
+			color: #333;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.u-book .info .authors,.u-book .info .summary{
+			font-size: 14px;
+			margin-bottom:4px;
+			line-height: 1.6;
+			font-weight: normal;
+			overflow: hidden;
+			color: #888;
+		}
+		.twoline-summary{
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+		}
+		.u-tags{
+			font-size: 14px;
+		}
+		.u-tags .tag{
+			padding: 2px 8px;
+			border: 1px solid #f0f0f0;
+
+		}
 	</style>
 </head>
 <body>
-	<div id="app" style="width:734px;overflow: hidden;">
+	<div id="app" style="width:{{screen_width}}px;overflow: hidden;">
 		<div class='top'>
 			<a class='top__back' href="/"></a>
 			<span class="top_title">男生频道</span>
 			<a class="header-home" href="/"></a>
-		</div> 
+		</div>
 		<div class="boy-wrap">
 			<div class="boy-scroll">
-				<% include include/boyAgirl-attention.html%>
-				<% include include/boyAgirl-EditorRecommendation.html%>
-				<% include include/boyAgirl-new-book-ruku.html%>
+				<section class="channel-group" v-for="section in data.items">
+					<div class="channel-group-card">
+						<div class="channel-group-header">
+							<h2 class="header-title">{{section.ad_name}}</h2>
+						</div>
+						<ul class="book-list">
+							<li v-for="book in section.data.data">
+								<div class="u-book">
+									<div class="cnt">
+										<div class="book-cover">
+											<img v-bind:src="book.cover" alt="{{book.title}}">
+										</div>
+										<div class="info">
+											<h3 class="title">{{book.title}}</h3>
+											<p class="authors">{{book.authors}}</p>
+											<p class="summary twoline-summary">
+												{{book.summary}}
+											</p>
+											<div class="u-tags" v-for="tag in book.tags" v-if="$index<3">
+												<span class="tag">{{tag}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
 			</div>
 		</div>
 		
 		
 	</div>
 	
-	
+
 </body>
-	<script src="/static/script/vue.js" type="text/javascript" ></script>
-	<script src="/static/script/zepto.js" type="text/javascript" ></script>
-	<script src="/static/script/pages/male.js" type="text/javascript"></script>
+<script src="/static/script/vue.js" type="text/javascript" ></script>
+<script src="/static/script/zepto.js" type="text/javascript" ></script>
+<script src="/static/script/pages/male.js" type="text/javascript"></script>
+
 </html>
