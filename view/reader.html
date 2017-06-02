@@ -441,7 +441,7 @@
                         Chapter_id=parseInt(curChapterId);
                     }
                     console.log(data);
-                    ChapterTotal=data.chapters.length;
+                    ChapterTotal=data.chapters;
                     callback && callback();
                 },'json');
             }
